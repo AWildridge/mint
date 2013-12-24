@@ -6,34 +6,51 @@ import us.evelus.world.model.Mob;
 public final class InteractionHandler {
 
     public static final int BUTTON_TYPE = 0x0;
-    public static final int CHAR_TYPE   = 0x1;
+    public static final int PLR_TYPE = 0x1;
+    public static final int OBJ_TYPE = 0x2;
 
     private ButtonDispatcher buttonDispatcher = new ButtonDispatcher();
-    private MobActionDispatcher charActionDispatcher = new MobActionDispatcher();
+    private PlayerActionDispatcher plrActionDispatcher = new PlayerActionDispatcher();
+    private ObjectActionDispatcher objectActionDispatcher = new ObjectActionDispatcher();
     private final World world;
 
     public InteractionHandler(World world) {
         this.world = world;
     }
 
-    public void handle(Mob character, String action, int type, int id) {
+    public void handle(Mob mob, String action, int type, long hash) {
         switch(type) {
             case BUTTON_TYPE:
-                if(!(character instanceof Player)) {
+                if(!(mob instanceof Player)) {
                     throw new IllegalStateException("NPCs cannot interact with buttons");
                 }
-                Player player = (Player) character;
-                buttonDispatcher.buttonPressed(player, id);
+                int buttonId = (int) hash & 0xffff;
+                Player player = (Player) mob;
+                buttonDispatcher.buttonPressed(player, buttonId);
                 break;
 
-            case CHAR_TYPE:
-                Mob target = world.getMob(id);
-                handleMobInteraction(character, action, target);
+            case PLR_TYPE:
+                int plrId = (int) hash & 0xffff;
+                Player target = world.getPlayer(plrId);
+                handlePlayerInteraction(mob, action, target);
+                break;
+
+            case OBJ_TYPE:
+                Position position = Position.fromHash30((int) hash & 0x3fffffff);
+                int typeId = (int) hash >> 30 & 0xffff;
+
+                // TEMPORARY
+                GameObject object = new GameObject();
+                handleObjInteraction(mob, action, object);
                 break;
         }
     }
 
-    public void handleMobInteraction(Mob character, String action, Mob target) {
-        charActionDispatcher.handle(character, action, target);
+    public void handlePlayerInteraction(Mob mob, String action, Player target) {
+        plrActionDispatcher.handle(mob, action, target);
+    }
+
+    public void handleObjInteraction(Mob mob, String action, GameObject object) {
+        objectActionDispatcher.handle(mob, action, object);
     }
 }

@@ -15,7 +15,11 @@ public class MessageConstants {
 
     public static final int INTERACT_MSG     = 0x08;
 
+    public static final int CLOCK_TICK_MSG = 0x09;
+
     public static final int COMMAND_MSG = 0xC8;
+
+    public static final int BATCH = 0xFF;
 
     private MessageConstants() {}
 }

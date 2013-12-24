@@ -1,6 +1,8 @@
 package us.evelus.world.net.msg.codec;
 
 import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.codec.decoder.*;
+import us.evelus.world.net.msg.codec.handler.BatchedMessageHandler;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +11,21 @@ public final class CodecRepository {
 
     private Map<Class<? extends DatagramMessage>, DatagramMessageHandler> handlers = new HashMap<>();
     private DatagramMessageDecoder<?>[] decoders = new  DatagramMessageDecoder[256];
+
+    public CodecRepository() {
+
+        // Register all of the decoders
+        register(new CommandMessageDecoder());
+        register(new MobWaypointMessageDecoder());
+        register(new SpawnPlayerMessageDecoder());
+        register(new TeleportMobMessageDecoder());
+        register(new ClockTickMessageDecoder());
+
+        register(new BatchedMessageDecoder(this));
+
+        // Register all of the handlers
+        register(new BatchedMessageHandler(this));
+    }
 
     private void checkId(int id) {
         if(id < 0 || id > 255) {

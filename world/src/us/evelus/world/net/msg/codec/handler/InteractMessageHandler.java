@@ -18,6 +18,6 @@ public final class InteractMessageHandler extends DatagramMessageHandler<Interac
     @Override
     public void handle(Sender sender, InteractMessage msg) {
         Mob mob = world.getMob(msg.getMobId());
-        world.getInteractionHandler().handle(mob, msg.getAction(), msg.getType(), msg.getTargetId());
+        world.getInteractionHandler().handle(mob, msg.getAction(), msg.getType(), msg.getTargetHash());
     }
 }

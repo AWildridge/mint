@@ -11,8 +11,12 @@ public abstract class Mob extends Entity {
         interactionHandler = handler;
     }
 
-    public void interact(String action, Mob target) {
-        interactionHandler.handleMobInteraction(this, action, target);
+    public void interact(String action, Player target) {
+        interactionHandler.handlePlayerInteraction(this, action, target);
+    }
+
+    public void interact(String action, GameObject obj) {
+        interactionHandler.handleObjInteraction(this, action, obj);
     }
 
     public void setId(int id) {

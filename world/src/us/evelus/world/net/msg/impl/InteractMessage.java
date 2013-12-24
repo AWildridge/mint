@@ -7,12 +7,12 @@ public final class InteractMessage extends DatagramMessage {
     private String action;
     private int mobId;
     private int type;
-    private int targetId;
+    private long targetHash;
 
-    public InteractMessage(int mobId, int type, int targetId, String action) {
+    public InteractMessage(int mobId, int type, int targetHash, String action) {
         this.mobId = mobId;
         this.type = type;
-        this.targetId = targetId;
+        this.targetHash = targetHash;
         this.action = action;
     }
 
@@ -28,7 +28,7 @@ public final class InteractMessage extends DatagramMessage {
         return type;
     }
 
-    public int getTargetId() {
-        return targetId;
+    public long getTargetHash() {
+        return targetHash;
     }
 }

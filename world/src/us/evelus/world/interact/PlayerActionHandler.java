@@ -1,12 +1,13 @@
 package us.evelus.world.interact;
 
 import us.evelus.world.model.Mob;
+import us.evelus.world.model.Player;
 
-public abstract class MobActionHandler<M extends Mob, T extends Mob> {
+public abstract class PlayerActionHandler<T extends Mob> {
 
     private final String action;
 
-    public MobActionHandler(String action) {
+    public PlayerActionHandler(String action) {
         this.action = action;
     }
 
@@ -14,5 +15,5 @@ public abstract class MobActionHandler<M extends Mob, T extends Mob> {
         return action;
     }
 
-    public abstract void handle(M mob, T target);
+    public abstract void handle(T mob, Player target);
 }

@@ -28,7 +28,6 @@ public final class InboundDatagramMessageHandler extends SimpleChannelInboundHan
 
         /* Ignore packets that contain no data */
         if(!buf.isReadable()) {
-            packet.release();
             return;
         }
 
@@ -37,7 +36,6 @@ public final class InboundDatagramMessageHandler extends SimpleChannelInboundHan
         DatagramMessageDecoder decoder = repository.getDecoder(id);
         if(decoder == null) {
             logger.info("No such decoder registered [msg=" + id + "]");
-            packet.release();
             return;
         }
 
@@ -56,7 +54,6 @@ public final class InboundDatagramMessageHandler extends SimpleChannelInboundHan
         } catch(IOException | RuntimeException ex) {
             logger.error("Exception caught while dispatching message [msg=" + id + "]", ex);
         } finally {
-            packet.release();
             sender.destroy();
         }
     }
