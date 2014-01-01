@@ -13,6 +13,8 @@
     <orderEntry type="library" name="junit:junit:4.9" level="project" />
     <orderEntry type="library" name="org.codehaus.jackson:jackson-mapper-asl:1.9.9" level="project" />
     <orderEntry type="library" name="org.slf4j:slf4j-simple:1.7.4" level="project" />
+    <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.6.7" level="project" />
+    <orderEntry type="library" name="org.jruby:jruby-complete:1.7.6" level="project" />
   </component>
 </module>
 

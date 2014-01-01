@@ -9,11 +9,10 @@ public class MessageConstants {
     public static final int SPAWN_PROJECTILE_MSG  = 0x04;
     public static final int SPAWN_GROUND_ITEM_MSG = 0x05;
 
-    public static final int TELEPORT_CHAR_MSG     = 0x06;
-    public static final int WAYPOINT_CHAR_MSG     = 0x07;
+    public static final int TELEPORT_MOB_MSG = 0x06;
+    public static final int WAYPOINT_MOB_MSG = 0x07;
 
-
-    public static final int INTERACT_MSG     = 0x08;
+    public static final int INTERACT_MSG = 0x08;
 
     public static final int CLOCK_TICK_MSG = 0x09;
 

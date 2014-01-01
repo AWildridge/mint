@@ -9,7 +9,7 @@ import us.evelus.world.net.msg.impl.MobWaypointMessage;
 public class MobWaypointMessageDecoder extends DatagramMessageDecoder<MobWaypointMessage> {
 
     public MobWaypointMessageDecoder() {
-        super(MessageConstants.WAYPOINT_CHAR_MSG);
+        super(MessageConstants.WAYPOINT_MOB_MSG);
     }
 
     @Override

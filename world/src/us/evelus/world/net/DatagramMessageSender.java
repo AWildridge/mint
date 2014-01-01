@@ -7,13 +7,13 @@ import io.netty.channel.socket.DatagramPacket;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 
-public final class Sender {
+public final class DatagramMessageSender {
 
     private final InetSocketAddress address;
     private final Channel channel;
     private boolean closed;
 
-    public Sender(InetSocketAddress address, Channel channel) {
+    public DatagramMessageSender(InetSocketAddress address, Channel channel) {
         this.address = address;
         this.channel = channel;
     }

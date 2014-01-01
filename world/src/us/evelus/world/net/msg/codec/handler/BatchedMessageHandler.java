@@ -2,7 +2,7 @@ package us.evelus.world.net.msg.codec.handler;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import us.evelus.world.net.Sender;
+import us.evelus.world.net.DatagramMessageSender;
 import us.evelus.world.net.msg.DatagramMessage;
 import us.evelus.world.net.msg.codec.CodecRepository;
 import us.evelus.world.net.msg.codec.DatagramMessageHandler;
@@ -19,7 +19,7 @@ public final class BatchedMessageHandler extends DatagramMessageHandler<BatchedM
     }
 
     @Override
-    public void handle(Sender sender, BatchedMessage msg) {
+    public void handle(DatagramMessageSender sender, BatchedMessage msg) {
         for(DatagramMessage message : msg.getMessages()) {
             DatagramMessageHandler handler = repository.getHandler(message);
 

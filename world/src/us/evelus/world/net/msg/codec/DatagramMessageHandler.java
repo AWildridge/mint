@@ -1,6 +1,6 @@
 package us.evelus.world.net.msg.codec;
 
-import us.evelus.world.net.Sender;
+import us.evelus.world.net.DatagramMessageSender;
 import us.evelus.world.net.msg.DatagramMessage;
 
 public abstract class DatagramMessageHandler<T extends DatagramMessage> {
@@ -15,5 +15,5 @@ public abstract class DatagramMessageHandler<T extends DatagramMessage> {
         return messageClass;
     }
 
-    public abstract void handle(Sender sender, T message);
+    public abstract void handle(DatagramMessageSender sender, T message);
 }

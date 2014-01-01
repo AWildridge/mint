@@ -2,9 +2,9 @@ package us.evelus.world.model;
 
 public class GameObject {
 
-    private int id;
+    private int type;
 
     public int getType() {
-        return id;
+        return type;
     }
 }

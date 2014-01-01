@@ -1,7 +1,6 @@
 package us.evelus.world.interact;
 
 import us.evelus.world.model.*;
-import us.evelus.world.model.Mob;
 
 public final class InteractionHandler {
 

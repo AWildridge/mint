@@ -9,7 +9,7 @@ import us.evelus.world.net.msg.impl.TeleportMobMessage;
 public final class TeleportMobMessageDecoder extends DatagramMessageDecoder<TeleportMobMessage> {
 
     public TeleportMobMessageDecoder() {
-        super(MessageConstants.TELEPORT_CHAR_MSG);
+        super(MessageConstants.TELEPORT_MOB_MSG);
     }
 
     @Override

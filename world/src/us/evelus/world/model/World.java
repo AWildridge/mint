@@ -1,6 +1,7 @@
 package us.evelus.world.model;
 
 import us.evelus.world.interact.InteractionHandler;
+import us.evelus.world.task.TaskScheduler;
 
 public final class World {
 
@@ -8,19 +9,20 @@ public final class World {
 
     private MobList<Player> players = new MobList<>(PLAYER_CAPACITY);
     private InteractionHandler interactionHandler = new InteractionHandler(this);
+    private TaskScheduler scheduler = new TaskScheduler();
 
     public void tick() {
-
+        scheduler.tick();
     }
 
     public boolean addPlayer(Player player) {
-        boolean bool = players.add(player);
+        boolean successful = players.add(player);
 
-        if(bool) {
+        if(successful) {
             player.setInteractionHandler(interactionHandler);
         }
 
-        return bool;
+        return successful;
     }
 
     public Player getPlayer(int id) {

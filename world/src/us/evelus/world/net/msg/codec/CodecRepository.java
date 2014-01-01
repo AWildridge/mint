@@ -19,7 +19,7 @@ public final class CodecRepository {
         register(new MobWaypointMessageDecoder());
         register(new SpawnPlayerMessageDecoder());
         register(new TeleportMobMessageDecoder());
-        register(new ClockTickMessageDecoder());
+        register(new TickMessageDecoder());
 
         register(new BatchedMessageDecoder(this));
 

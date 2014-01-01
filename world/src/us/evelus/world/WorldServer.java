@@ -8,9 +8,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.command.CommandDispatcher;
 import us.evelus.world.model.World;
+import us.evelus.world.model.StateSymbol;
 import us.evelus.world.net.InboundDatagramMessageHandler;
 import us.evelus.world.net.msg.codec.CodecRepository;
-import us.evelus.world.net.msg.codec.handler.ClockTickMessageHandler;
+import us.evelus.world.net.msg.codec.handler.TickMessageHandler;
 import us.evelus.world.net.msg.codec.handler.CommandMessageHandler;
 import us.evelus.world.net.msg.codec.handler.InteractMessageHandler;
 import us.evelus.world.net.msg.codec.handler.SpawnPlayerMessageHandler;
@@ -32,7 +33,13 @@ public final class WorldServer {
 
         codecRepository.register(new InteractMessageHandler(world));
         codecRepository.register(new SpawnPlayerMessageHandler(world));
-        codecRepository.register(new ClockTickMessageHandler(world));
+        codecRepository.register(new TickMessageHandler(world));
+
+        try {
+            StateSymbol.load("./data/config.db");
+        } catch(ClassNotFoundException ex) {
+            logger.error("Failed to load the SQLite driver", ex);
+        }
     }
 
     public void bind(int port) {

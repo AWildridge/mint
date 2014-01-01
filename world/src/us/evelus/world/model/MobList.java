@@ -33,9 +33,9 @@ public final class MobList<T extends Mob> implements Iterable<T> {
 
         @Override
         public void remove() {
-            Mob character = mobs[currentId];
+            Mob mob = mobs[currentId];
             mobs[currentId] = null;
-            character.resetId();
+            mob.resetId();
             size--;
         }
     }
@@ -51,14 +51,14 @@ public final class MobList<T extends Mob> implements Iterable<T> {
         }
     }
 
-    public boolean add(T character) {
+    public boolean add(T mob) {
         for(int i = 0; i < mobs.length; i++) {
             if(mobs[i] != null) {
                 continue;
             }
 
-            mobs[i] = character;
-            character.setId(i + 1);
+            mobs[i] = mob;
+            mob.setId(i + 1);
             size++;
 
             return true;

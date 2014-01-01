@@ -2,12 +2,11 @@ package us.evelus.world.net.msg.codec.handler;
 
 import io.netty.buffer.Unpooled;
 import org.codehaus.jackson.map.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.model.Player;
 import us.evelus.world.model.World;
-import us.evelus.world.net.Sender;
+import us.evelus.world.net.DatagramMessageSender;
 import us.evelus.world.net.msg.codec.DatagramMessageHandler;
 import us.evelus.world.net.msg.impl.SpawnPlayerMessage;
 
@@ -27,7 +26,7 @@ public final class SpawnPlayerMessageHandler extends DatagramMessageHandler<Spaw
     }
 
     @Override
-    public void handle(Sender sender, SpawnPlayerMessage msg) {
+    public void handle(DatagramMessageSender sender, SpawnPlayerMessage msg) {
 
         Player player = new Player();
         player.setPosition(msg.getPosition());
