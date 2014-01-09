@@ -1,7 +1,7 @@
 package us.evelus.world.interact;
 
-import us.evelus.world.model.GameObject;
-import us.evelus.world.model.Mob;
+import us.evelus.world.model.WorldObject;
+import us.evelus.world.model.mob.Mob;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,7 +21,7 @@ public final class ObjectActionDispatcher {
         multiplexer.bind(handler);
     }
 
-    public void handle(Mob mob, String action, GameObject object) {
+    public void handle(Mob mob, String action, WorldObject object) {
         ObjectActionMultiplexer multiplexer = multiplexers.get(action);
         if(multiplexer != null) {
             multiplexer.handle(mob, object);

@@ -5,7 +5,7 @@ import us.evelus.world.net.msg.MessageConstants;
 import us.evelus.world.net.msg.codec.DatagramMessageDecoder;
 import us.evelus.world.net.msg.codec.MalformedMessageException;
 import us.evelus.world.net.msg.impl.CommandMessage;
-import us.evelus.world.util.ByteBufUtils;
+import us.evelus.util.ByteBufUtils;
 
 public final class CommandMessageDecoder extends DatagramMessageDecoder<CommandMessage> {
 

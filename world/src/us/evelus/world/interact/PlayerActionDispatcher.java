@@ -1,6 +1,6 @@
 package us.evelus.world.interact;
 
-import us.evelus.world.model.Mob;
+import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.Player;
 
 import java.util.HashMap;

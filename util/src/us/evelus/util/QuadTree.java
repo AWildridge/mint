@@ -1,4 +1,4 @@
-package us.evelus.world.util;
+package us.evelus.util;
 
 import java.awt.*;
 import java.util.LinkedList;

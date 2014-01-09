@@ -25,8 +25,10 @@ public final class BatchedMessageDecoder extends DatagramMessageDecoder<BatchedM
     @Override
     public BatchedMessage decode(ByteBuf buf) throws MalformedMessageException {
 
+        int amtChunks = buf.readByte();
+
         if(mask == UNSET) {
-            mask = (1 << buf.readByte()) - 1;
+            mask = (1 << amtChunks) - 1;
             buffer.clear();
         }
 

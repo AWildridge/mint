@@ -8,13 +8,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.command.CommandDispatcher;
 import us.evelus.world.model.World;
-import us.evelus.world.model.StateSymbol;
+import us.evelus.world.model.mob.StateSymbol;
 import us.evelus.world.net.InboundDatagramMessageHandler;
 import us.evelus.world.net.msg.codec.CodecRepository;
 import us.evelus.world.net.msg.codec.handler.TickMessageHandler;
 import us.evelus.world.net.msg.codec.handler.CommandMessageHandler;
 import us.evelus.world.net.msg.codec.handler.InteractMessageHandler;
 import us.evelus.world.net.msg.codec.handler.SpawnPlayerMessageHandler;
+import us.evelus.world.plugin.PluginContext;
+import us.evelus.world.plugin.PluginLoader;
+
+import java.io.IOException;
 
 public final class WorldServer {
 
@@ -23,6 +27,7 @@ public final class WorldServer {
     private final EventLoopGroup loopGroup = new NioEventLoopGroup();
     private final CodecRepository codecRepository = new CodecRepository();
     private final CommandDispatcher commandDispatcher = new CommandDispatcher();
+    private final PluginLoader pluginLoader = new PluginLoader();
     private final Bootstrap bootstrap = new Bootstrap();
     private final World world = new World();
 
@@ -39,6 +44,16 @@ public final class WorldServer {
             StateSymbol.load("./data/config.db");
         } catch(ClassNotFoundException ex) {
             logger.error("Failed to load the SQLite driver", ex);
+        }
+
+        // Create and set the plugin context
+        PluginContext context = new PluginContext(world);
+        pluginLoader.setPluginContext(context);
+
+        try {
+            pluginLoader.load("data/script");
+        } catch (IOException | RuntimeException ex) {
+            logger.error("Failed to load the server plugins", ex);
         }
     }
 

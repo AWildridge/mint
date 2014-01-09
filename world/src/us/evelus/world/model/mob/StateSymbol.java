@@ -1,4 +1,4 @@
-package us.evelus.world.model;
+package us.evelus.world.model.mob;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,6 +1,6 @@
 package us.evelus.world.net.msg.codec.handler;
 
-import us.evelus.world.model.Mob;
+import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.World;
 import us.evelus.world.net.DatagramMessageSender;
 import us.evelus.world.net.msg.codec.DatagramMessageHandler;

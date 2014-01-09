@@ -1,6 +1,8 @@
 package us.evelus.world.model;
 
 import us.evelus.world.interact.InteractionHandler;
+import us.evelus.world.model.mob.Mob;
+import us.evelus.world.model.mob.MobList;
 import us.evelus.world.task.TaskScheduler;
 
 public final class World {

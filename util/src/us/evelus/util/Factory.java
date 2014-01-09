@@ -1,4 +1,4 @@
-package us.evelus.world.util;
+package us.evelus.util;
 
 public interface Factory<T> {
 
