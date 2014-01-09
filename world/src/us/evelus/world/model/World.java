@@ -3,7 +3,6 @@ package us.evelus.world.model;
 import us.evelus.world.interact.InteractionHandler;
 import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.mob.MobUpdateObserver;
-import us.evelus.world.model.observer.Observer;
 import us.evelus.world.model.update.UpdateDispatcher;
 import us.evelus.world.task.TaskScheduler;
 

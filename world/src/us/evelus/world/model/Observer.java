@@ -1,10 +1,9 @@
-package us.evelus.world.model.observer;
+package us.evelus.world.model;
 
-import us.evelus.world.model.Entity;
 import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.mob.MobEvent;
 
-public final class Observer extends Entity implements EventVisitor {
+public final class Observer extends Entity implements EntityEventVisitor {
 
     @Override
     public void visit(MobEvent event) {
@@ -13,6 +12,6 @@ public final class Observer extends Entity implements EventVisitor {
 
     // TODO
     public void synchronizePositionWith(Mob mob) {
-
+        setPosition(mob.getPosition());
     }
 }

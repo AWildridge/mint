@@ -1,7 +1,6 @@
 package us.evelus.world.model;
 
 import us.evelus.event.Event;
-import us.evelus.world.model.observer.Observer;
 
 public abstract class EntityEvent extends Event {
 
@@ -11,7 +10,7 @@ public abstract class EntityEvent extends Event {
         this.entity = entity;
     }
 
-    public abstract void visit(Observer observer);
+    public abstract void accept(Observer observer);
 
     public Entity getEntity() {
         return entity;

@@ -34,9 +34,9 @@ public final class SpawnPlayerMessageHandler extends DatagramMessageHandler<Spaw
         boolean successful = world.addPlayer(player);
 
         Map<String, Object> response = new HashMap<>();
-        response.put("responseId", msg.getResponseId());
+        response.put("uid", msg.getUid());
         response.put("successful", successful);
-        response.put("playerId", player.getId());
+        response.put("id", player.getId());
 
         try {
             sender.write(Unpooled.wrappedBuffer(mapper.writeValueAsBytes(response)));

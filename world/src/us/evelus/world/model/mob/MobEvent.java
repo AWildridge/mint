@@ -1,7 +1,7 @@
 package us.evelus.world.model.mob;
 
 import us.evelus.world.model.EntityEvent;
-import us.evelus.world.model.observer.Observer;
+import us.evelus.world.model.Observer;
 
 public abstract class MobEvent extends EntityEvent {
 
@@ -13,7 +13,7 @@ public abstract class MobEvent extends EntityEvent {
     }
 
     @Override
-    public void visit(Observer observer) {
+    public void accept(Observer observer) {
         observer.visit(this);
     }
 

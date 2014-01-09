@@ -4,7 +4,7 @@ import us.evelus.event.dispatcher.AbstractEventDispatcher;
 import us.evelus.event.dispatcher.EventDispatcher;
 import us.evelus.world.model.EntityEvent;
 import us.evelus.world.model.EntityList;
-import us.evelus.world.model.observer.Observer;
+import us.evelus.world.model.Observer;
 
 public final class UpdateDispatcher {
 

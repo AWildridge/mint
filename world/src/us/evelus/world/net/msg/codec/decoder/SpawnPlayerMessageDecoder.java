@@ -16,10 +16,10 @@ public final class SpawnPlayerMessageDecoder extends DatagramMessageDecoder<Spaw
     @Override
     public SpawnPlayerMessage decode(ByteBuf buf) throws MalformedMessageException {
         Position position = Position.fromHash30(buf.readInt());
-        long responseId = buf.readLong();
+        long uid = buf.readLong();
 
         SpawnPlayerMessage message = new SpawnPlayerMessage(position);
-        message.setResponseId(responseId);
+        message.setUid(uid);
 
         return message;
     }

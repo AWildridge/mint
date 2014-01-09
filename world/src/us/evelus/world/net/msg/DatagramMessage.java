@@ -2,13 +2,13 @@ package us.evelus.world.net.msg;
 
 public abstract class DatagramMessage {
 
-    private long responseId = -1L;
+    private long uid = -1L;
 
-    public void setResponseId(long responseId) {
-        this.responseId = responseId;
+    public void setUid(long uid) {
+        this.uid = uid;
     }
 
-    public long getResponseId() {
-        return responseId;
+    public long getUid() {
+        return uid;
     }
 }

@@ -7,17 +7,11 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.command.CommandDispatcher;
-import us.evelus.world.model.Graphic;
-import us.evelus.world.model.Player;
 import us.evelus.world.model.World;
 import us.evelus.world.model.mob.StateSymbol;
-import us.evelus.world.model.observer.Observer;
 import us.evelus.world.net.InboundDatagramMessageHandler;
 import us.evelus.world.net.msg.codec.CodecRepository;
-import us.evelus.world.net.msg.codec.handler.TickMessageHandler;
-import us.evelus.world.net.msg.codec.handler.CommandMessageHandler;
-import us.evelus.world.net.msg.codec.handler.InteractMessageHandler;
-import us.evelus.world.net.msg.codec.handler.SpawnPlayerMessageHandler;
+import us.evelus.world.net.msg.codec.handler.*;
 import us.evelus.world.plugin.PluginContext;
 import us.evelus.world.plugin.PluginLoader;
 
@@ -41,6 +35,7 @@ public final class WorldServer {
 
         codecRepository.register(new InteractMessageHandler(world));
         codecRepository.register(new SpawnPlayerMessageHandler(world));
+        codecRepository.register(new SpawnObserverMessageHandler(world));
         codecRepository.register(new TickMessageHandler(world));
 
         try {
@@ -71,19 +66,9 @@ public final class WorldServer {
         }
     }
 
-    public void test() {
-        Observer observer = new Observer();
-        Player player = new Player();
-        player.displayGraphic(new Graphic());
-        world.addPlayer(player);
-        world.addObserver(observer);
-        world.tick();
-    }
-
     public static void main(String[] args) {
         WorldServer server = new WorldServer();
         server.init();
-        server.test();
         server.bind(5555);
     }
 }
