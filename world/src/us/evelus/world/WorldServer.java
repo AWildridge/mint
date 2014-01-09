@@ -7,8 +7,11 @@ import io.netty.channel.socket.nio.NioDatagramChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.command.CommandDispatcher;
+import us.evelus.world.model.Graphic;
+import us.evelus.world.model.Player;
 import us.evelus.world.model.World;
 import us.evelus.world.model.mob.StateSymbol;
+import us.evelus.world.model.observer.Observer;
 import us.evelus.world.net.InboundDatagramMessageHandler;
 import us.evelus.world.net.msg.codec.CodecRepository;
 import us.evelus.world.net.msg.codec.handler.TickMessageHandler;
@@ -50,8 +53,9 @@ public final class WorldServer {
         PluginContext context = new PluginContext(world);
         pluginLoader.setPluginContext(context);
 
+        // Load all of the server plugins
         try {
-            pluginLoader.load("data/script");
+            pluginLoader.load("data/plugins");
         } catch (IOException | RuntimeException ex) {
             logger.error("Failed to load the server plugins", ex);
         }
@@ -67,9 +71,19 @@ public final class WorldServer {
         }
     }
 
+    public void test() {
+        Observer observer = new Observer();
+        Player player = new Player();
+        player.displayGraphic(new Graphic());
+        world.addPlayer(player);
+        world.addObserver(observer);
+        world.tick();
+    }
+
     public static void main(String[] args) {
         WorldServer server = new WorldServer();
         server.init();
+        server.test();
         server.bind(5555);
     }
 }

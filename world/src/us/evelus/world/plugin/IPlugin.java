@@ -4,8 +4,8 @@ public interface IPlugin {
     public void setPluginContext(PluginContext context);
     public void load();
     public void unload();
-    public String[] authors();
-    public String[] dependencies();
-    public String name();
+    public String[] getAuthors();
+    public String[] getDependencies();
+    public String getDescription();
+    public String getName();
 }
-                        cd

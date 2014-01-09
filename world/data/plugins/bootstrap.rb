@@ -1,4 +1,4 @@
-$:.unshift 'data/script'
+$:.unshift 'data/plugins'
 
 require 'java'
 require 'fixins'

@@ -1,5 +1,7 @@
 package us.evelus.world.model;
 
+import java.awt.*;
+
 public final class Position {
 
     private int x;
@@ -16,6 +18,26 @@ public final class Position {
 
     public int plane() {
         return plane;
+    }
+
+    public int blockX() {
+        return x >> 3;
+    }
+
+    public int blockY() {
+        return y >> 3;
+    }
+
+    public int sceneX() {
+        return blockX() - 6 << 3;
+    }
+
+    public int sceneY() {
+        return blockY() - 6 << 3;
+    }
+
+    public Rectangle getSceneBounds() {
+        return new Rectangle(sceneX(), sceneY(), 104, 104);
     }
 
     public static Position fromHash30(int hash) {

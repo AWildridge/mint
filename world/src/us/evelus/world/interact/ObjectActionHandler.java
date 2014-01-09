@@ -1,6 +1,6 @@
 package us.evelus.world.interact;
 
-import us.evelus.world.model.WorldObject;
+import us.evelus.world.model.SceneObject;
 import us.evelus.world.model.mob.Mob;
 
 public abstract class ObjectActionHandler<T extends Mob> {
@@ -21,5 +21,5 @@ public abstract class ObjectActionHandler<T extends Mob> {
         return ids;
     }
 
-    public abstract void handle(T mob, WorldObject object);
+    public abstract void handle(T mob, SceneObject object);
 }

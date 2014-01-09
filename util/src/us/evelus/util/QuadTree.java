@@ -1,6 +1,7 @@
 package us.evelus.util;
 
 import java.awt.*;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -38,7 +39,7 @@ public final class QuadTree<E extends Object> {
     }
 
     public List<E> query(Rectangle rectangle) {
-        if(root == null) return null;
+        if(root == null) return Collections.EMPTY_LIST;
         List<E> list = new LinkedList<>();
         query(list, root, rectangle);
         return list;

@@ -7,19 +7,14 @@ import us.evelus.world.model.Position;
 public abstract class MobObserverAdapter implements MobObserver {
 
     @Override
-    public void positionUpdated(Mob mob, Position position) {
-        modified(mob);
-    }
+    public void positionUpdated(Mob mob, Position position) {}
 
     @Override
-    public void graphicDisplayed(Mob mob, Graphic graphic) {
-        modified(mob);
-    }
+    public void graphicDisplayed(Mob mob, Graphic graphic) {}
 
     @Override
-    public void animated(Mob mob, Animation animation) {
-        modified(mob);
-    }
+    public void animated(Mob mob, Animation animation) {}
 
-    public void modified(Mob mob) {}
+    @Override
+    public void modified(Mob mob) { }
 }

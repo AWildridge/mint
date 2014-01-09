@@ -22,32 +22,46 @@ module Plugin
                 hook
         end
 
+        # Implemented java method from IPlugin interface, sets the plugin context.
         def setPluginContext(context)
                 @context = context
         end
 
+        # Implemented java method from IPlugin interface, gets the authors of the plugin.
+        def getAuthors
+                my.authors
+        end
+
+        # Implemented java method from IPlugin interface, gets the dependencies of the plugin
+        # and loads them in listed order if they havent been loaded already.
+        def getDependencies
+                my.dependencies
+        end
+
+        # Implemented java method from IPlugin interface, gets the description of the plugin.
+        def getDescription
+                my.description
+        end
+
+        # Implemented java method from IPlugin interface, gets the name of the plugin
+        # from the name of the plugin class in an underscored format.
+        def getName
+                my.name.gsub(/plugin/i, '').underscore
+        end
+
+        #
+        # Binds all of the hooks registered to the plugin.
+        #
+        # @return nil
+        #
         def bind!
                 hooks.each { |hook| hook.bind(@context) }
+                nil
         end
 
         def unbind!
                 hooks.each { |hook| hook.unbind(@context) }
-        end
-
-        def authors
-                my.authors
-        end
-
-        def dependencies
-                my.dependencies
-        end
-
-        def notes
-                my.notes
-        end
-
-        def name
-                my.name.gsub(/plugin/i, '').underscore
+                nil
         end
 
         def hooks
@@ -60,7 +74,7 @@ module Plugin
                 end
 
                 def info(args={})
-                        %w(authors dependencies notes).each do |type|
+                        %w(authors dependencies description).each do |type|
                                 class_eval <<-RUBY, __FILE__, __LINE__
                                         @#{type} = args[:#{type}]
                                 RUBY
@@ -75,8 +89,8 @@ module Plugin
                         @dependencies ||= []
                 end
 
-                def notes
-                        @notes ||= 'There are no notes on this plugin.'
+                def description
+                        @description ||= 'There are no notes on this plugin.'
                 end
         end
 

@@ -1,6 +1,6 @@
 package us.evelus.world.model;
 
-public class WorldObject {
+public class SceneObject {
 
     private int type;
 

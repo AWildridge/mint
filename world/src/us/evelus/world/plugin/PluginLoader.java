@@ -46,7 +46,8 @@ public final class PluginLoader {
                 continue;
             }
 
-            // Check if the plugin script exists in the directory
+            // Check if the plugin script exists in the directory, you only load the 'plugin.rb' file and from there it can
+            // require other files as needed
             File file = new File(dir, "plugin.rb");
             if(!file.exists()) {
                 continue;
@@ -59,17 +60,17 @@ public final class PluginLoader {
         for(IPlugin plugin : plugins.values()) {
 
             // Load each of the plugin dependencies
-            for(String dependency : plugin.dependencies()) {
+            for(String dependency : plugin.getDependencies()) {
 
                 if(!plugins.containsKey(dependency)) {
-                    throw new InvalidDependencyException("no such dependency '" + dependency + "' requested by '" + plugin.name() + "' plugin");
+                    throw new InvalidDependencyException("no such dependency '" + dependency + "' requested by '" + plugin.getName() + "' plugin");
                 }
 
                 loadPlugin(dependency);
             }
 
             // Load the plugin
-            loadPlugin(plugin.name());
+            loadPlugin(plugin.getName());
         }
 
         logger.info("Loaded " + plugins.size() + " plugins...");
@@ -87,7 +88,7 @@ public final class PluginLoader {
     }
 
     public void register(IPlugin plugin) {
-        plugins.put(plugin.name(), plugin);
+        plugins.put(plugin.getName(), plugin);
         plugin.setPluginContext(context);
     }
 

@@ -1,6 +1,6 @@
 package us.evelus.world.interact;
 
-import us.evelus.world.model.WorldObject;
+import us.evelus.world.model.SceneObject;
 import us.evelus.world.model.mob.Mob;
 
 import java.util.HashMap;
@@ -16,7 +16,7 @@ public final class ObjectActionMultiplexer {
         }
     }
 
-    public void handle(Mob mob, WorldObject object) {
+    public void handle(Mob mob, SceneObject object) {
         ObjectActionHandler handler = handlers.get(object.getType());
         if(handler != null) {
             handler.handle(mob, object);

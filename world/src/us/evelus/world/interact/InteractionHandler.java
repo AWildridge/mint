@@ -40,7 +40,7 @@ public final class InteractionHandler {
                 int typeId = (int) hash >> 30 & 0xffff;
 
                 // TEMPORARY
-                WorldObject object = new WorldObject();
+                SceneObject object = new SceneObject();
                 handleObjInteraction(mob, action, object);
                 break;
         }
@@ -50,7 +50,7 @@ public final class InteractionHandler {
         plrActionDispatcher.handle(mob, action, target);
     }
 
-    public void handleObjInteraction(Mob mob, String action, WorldObject object) {
+    public void handleObjInteraction(Mob mob, String action, SceneObject object) {
         objectActionDispatcher.handle(mob, action, object);
     }
 

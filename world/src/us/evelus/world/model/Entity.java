@@ -2,7 +2,8 @@ package us.evelus.world.model;
 
 public abstract class Entity {
 
-    private Position position;
+    private Position position = new Position();  // TEMP
+    private int id;
 
     public Entity() {}
 
@@ -12,5 +13,17 @@ public abstract class Entity {
 
     public Position getPosition() {
         return position;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void resetId() {
+        id = -1;
     }
 }
