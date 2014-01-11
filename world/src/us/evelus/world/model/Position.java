@@ -36,6 +36,10 @@ public final class Position {
         return blockY() - 6 << 3;
     }
 
+    public boolean within(Rectangle rectangle) {
+        return rectangle.contains(x, y);
+    }
+
     public Rectangle getSceneBounds() {
         return new Rectangle(sceneX(), sceneY(), 104, 104);
     }

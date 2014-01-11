@@ -18,8 +18,9 @@ public final class CodecRepository {
         register(new CommandMessageDecoder());
         register(new MobWaypointMessageDecoder());
         register(new SpawnPlayerMessageDecoder());
-        register(new SpawnPlayerMessageDecoder());
+        register(new SpawnObserverMessageDecoder());
         register(new TeleportMobMessageDecoder());
+        register(new QueryObserverMessageDecoder());
         register(new TickMessageDecoder());
 
         register(new BatchedMessageDecoder(this));

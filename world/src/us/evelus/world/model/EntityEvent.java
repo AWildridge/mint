@@ -10,7 +10,7 @@ public abstract class EntityEvent extends Event {
         this.entity = entity;
     }
 
-    public abstract void accept(Observer observer);
+    public abstract void accept(EventVisitor visitor);
 
     public Entity getEntity() {
         return entity;

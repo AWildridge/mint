@@ -14,11 +14,11 @@ public final class SpawnObserverMessageDecoder extends DatagramMessageDecoder<Sp
 
     @Override
     public SpawnObserverMessage decode(ByteBuf buf) throws MalformedMessageException {
-        int flag     = buf.readInt();
-        int location = buf.readInt();
+        int flag     = buf.readByte();
+        int hash     = buf.readInt();
         long uid     = buf.readLong();
 
-        SpawnObserverMessage msg = new SpawnObserverMessage(flag, location);
+        SpawnObserverMessage msg = new SpawnObserverMessage(flag, hash);
         msg.setUid(uid);
         return msg;
     }

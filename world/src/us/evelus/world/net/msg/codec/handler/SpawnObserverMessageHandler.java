@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import us.evelus.world.model.Position;
 import us.evelus.world.model.World;
 import us.evelus.world.model.mob.Mob;
-import us.evelus.world.model.Observer;
+import us.evelus.world.model.observer.SceneObserver;
 import us.evelus.world.net.DatagramMessageSender;
 import us.evelus.world.net.msg.codec.DatagramMessageHandler;
 import us.evelus.world.net.msg.impl.SpawnObserverMessage;
@@ -29,7 +29,7 @@ public final class SpawnObserverMessageHandler extends DatagramMessageHandler<Sp
 
     @Override
     public void handle(DatagramMessageSender sender, SpawnObserverMessage msg) {
-        Observer observer = new Observer();
+        SceneObserver observer = new SceneObserver();
         switch(msg.getFlag()) {
 
             case SpawnObserverMessage.EXACT_POS:

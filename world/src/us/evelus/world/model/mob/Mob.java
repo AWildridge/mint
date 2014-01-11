@@ -3,13 +3,14 @@ package us.evelus.world.model.mob;
 import us.evelus.world.interact.InteractionHandler;
 import us.evelus.world.model.*;
 
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
 public abstract class Mob extends Entity {
 
     private List<MobObserver> observers = new LinkedList<>();
-    private UpdateTable updateTable = new UpdateTable(this);
+    private QueuedUpdates queuedUpdates = new QueuedUpdates(this);
     private InteractionHandler interactionHandler;
 
     protected Mob() {}
@@ -24,7 +25,7 @@ public abstract class Mob extends Entity {
 
     @Override
     public void setPosition(Position position) {
-        updateTable.positionChanged(position);
+        queuedUpdates.positionChanged(position);
         super.setPosition(position);
     }
 
@@ -41,17 +42,33 @@ public abstract class Mob extends Entity {
     }
 
     public void displayGraphic(Graphic graphic) {
-        updateTable.graphicDisplayed(graphic);
+        queuedUpdates.graphicDisplayed(graphic);
     }
 
     public void animate(Animation animation) {
-        updateTable.animated(animation);
+        queuedUpdates.animated(animation);
+    }
+
+    public void teleport(Position position) {
+        setPosition(position);
+        queuedUpdates.teleported();
+    }
+
+    public void tick() {
+        //queuedUpdates.walkedDirection(Direction.NONE, Direction.NONE);
     }
 
     public void synchronize() {
         for(MobObserver observer : observers) {
-            updateTable.synchronize(observer);
+            queuedUpdates.synchronize(observer);
         }
-        updateTable.reset();
+        queuedUpdates.reset();
+    }
+
+    public void resetId() {
+        for(MobObserver observer : observers) {
+            observer.inactive(this);
+        }
+        super.resetId();
     }
 }

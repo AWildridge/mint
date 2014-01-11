@@ -76,18 +76,25 @@ public final class EntityList<T extends Entity> implements Iterable<T> {
 
     public boolean remove(T entity) {
         int id = entity.getId();
+
+        Entity other = entities[id = 1];
+        assert other == entity;
+
+        remove(id);
+        return true;
+    }
+
+    public boolean remove(int id) {
         checkId(id);
 
-        Entity other = entities[id - 1];
-        if(other == null) {
+        Entity entity = entities[id - 1];
+        if(entity == null) {
             return false;
         }
 
-        if(other.getId() != id) {
+        if(entity.getId() != id) {
             throw new IllegalArgumentException("unmatched entity ids");
         }
-
-        assert entity == other;
 
         entities[id - 1] = null;
         entity.resetId();

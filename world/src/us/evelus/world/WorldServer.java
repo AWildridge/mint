@@ -36,13 +36,14 @@ public final class WorldServer {
         codecRepository.register(new InteractMessageHandler(world));
         codecRepository.register(new SpawnPlayerMessageHandler(world));
         codecRepository.register(new SpawnObserverMessageHandler(world));
+        codecRepository.register(new QueryObserverMessageHandler(world));
         codecRepository.register(new TickMessageHandler(world));
 
-        try {
-            StateSymbol.load("./data/config.db");
-        } catch(ClassNotFoundException ex) {
-            logger.error("Failed to load the SQLite driver", ex);
-        }
+        //try {
+        //    StateSymbol.load("./data/config.db");
+        //} catch(ClassNotFoundException ex) {
+        //    logger.error("Failed to load the SQLite driver", ex);
+        //}
 
         // Create and set the plugin context
         PluginContext context = new PluginContext(world);

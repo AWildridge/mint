@@ -16,5 +16,11 @@ public abstract class MobObserverAdapter implements MobObserver {
     public void animated(Mob mob, Animation animation) {}
 
     @Override
+    public void teleported(Mob mob) {}
+
+    @Override
     public void modified(Mob mob) { }
+
+    @Override
+    public void inactive(Mob mob) {}
 }
