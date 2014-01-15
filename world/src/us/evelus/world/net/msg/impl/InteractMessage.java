@@ -1,8 +1,8 @@
 package us.evelus.world.net.msg.impl;
 
-import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.GameMessage;
 
-public final class InteractMessage extends DatagramMessage {
+public final class InteractMessage extends GameMessage {
 
     private String action;
     private int mobId;

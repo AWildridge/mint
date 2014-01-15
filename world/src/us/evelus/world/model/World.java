@@ -3,7 +3,7 @@ package us.evelus.world.model;
 import us.evelus.world.interact.InteractionHandler;
 import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.mob.MobUpdateObserver;
-import us.evelus.world.model.mob.event.PlayerBeaconEvent;
+import us.evelus.world.model.mob.event.PlayerActiveEvent;
 import us.evelus.world.model.observer.SceneObserver;
 import us.evelus.world.model.update.UpdateDispatcher;
 import us.evelus.world.task.TaskScheduler;
@@ -17,6 +17,7 @@ public final class World {
     private EntityList<NPC> npcs = new EntityList<>(NPC_CAPACITY);
     private UpdateDispatcher updateDispatcher = new UpdateDispatcher();
     private InteractionHandler interactionHandler = new InteractionHandler(this);
+    private RegionRepository regions = new RegionRepository();
     private TaskScheduler scheduler = new TaskScheduler();
 
     public void tick() {
@@ -27,26 +28,25 @@ public final class World {
         // Pre-process all of the players
         for(Player player : players) {
 
+            // Alert the observers that the player exists
+            updateDispatcher.queue(new PlayerActiveEvent(player));
+
             // Update the player
             player.tick();
-
-            // Alert the observers that the player exists
-            updateDispatcher.queue(new PlayerBeaconEvent(player));
 
             // Synchronize the state of the player with all of its observers
             player.synchronize();
         }
 
+        // Update the region repository
+        regions.tick();
+
         // Dispatch all the events to the observers registered to the world
         updateDispatcher.tick();
     }
 
-    public boolean addObserver(SceneObserver observer) {
+    public boolean addSceneObserver(SceneObserver observer) {
         return updateDispatcher.addObserver(observer);
-    }
-
-    public void removeObserver(int id) {
-        updateDispatcher.removeObserver(id);
     }
 
     public SceneObserver getSceneObserver(int id) {
@@ -61,6 +61,7 @@ public final class World {
 
         // Initialize the player object
         player.attach(new MobUpdateObserver(updateDispatcher));
+        player.attach(new MobActiveObserver(regions));
         player.setInteractionHandler(interactionHandler);
 
         return true;

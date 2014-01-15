@@ -14,7 +14,7 @@ public final class PlayerDeletedDescriptor extends SceneDescriptor {
     }
 
     @Override
-    public void serialize(ByteBuf buf) {
+    public void encode(ByteBuf buf) {
         buf.writeByte(DescriptorConstants.PLAYER_TYPE);
         buf.writeByte(1);
         buf.writeShort(player.getId());

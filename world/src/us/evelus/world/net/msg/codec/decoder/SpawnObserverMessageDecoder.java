@@ -2,11 +2,11 @@ package us.evelus.world.net.msg.codec.decoder;
 
 import io.netty.buffer.ByteBuf;
 import us.evelus.world.net.msg.MessageConstants;
-import us.evelus.world.net.msg.codec.DatagramMessageDecoder;
+import us.evelus.world.net.msg.codec.MessageDecoder;
 import us.evelus.world.net.msg.codec.MalformedMessageException;
 import us.evelus.world.net.msg.impl.SpawnObserverMessage;
 
-public final class SpawnObserverMessageDecoder extends DatagramMessageDecoder<SpawnObserverMessage> {
+public final class SpawnObserverMessageDecoder extends MessageDecoder<SpawnObserverMessage> {
 
     public SpawnObserverMessageDecoder() {
         super(MessageConstants.SPAWN_OBSERVER_MSG);

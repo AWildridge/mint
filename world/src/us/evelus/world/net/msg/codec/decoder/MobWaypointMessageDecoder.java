@@ -2,11 +2,11 @@ package us.evelus.world.net.msg.codec.decoder;
 
 import io.netty.buffer.ByteBuf;
 import us.evelus.world.net.msg.MessageConstants;
-import us.evelus.world.net.msg.codec.DatagramMessageDecoder;
+import us.evelus.world.net.msg.codec.MessageDecoder;
 import us.evelus.world.net.msg.codec.MalformedMessageException;
 import us.evelus.world.net.msg.impl.MobWaypointMessage;
 
-public class MobWaypointMessageDecoder extends DatagramMessageDecoder<MobWaypointMessage> {
+public class MobWaypointMessageDecoder extends MessageDecoder<MobWaypointMessage> {
 
     public MobWaypointMessageDecoder() {
         super(MessageConstants.WAYPOINT_MOB_MSG);

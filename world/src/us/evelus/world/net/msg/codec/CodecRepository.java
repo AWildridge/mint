@@ -1,16 +1,15 @@
 package us.evelus.world.net.msg.codec;
 
-import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.GameMessage;
 import us.evelus.world.net.msg.codec.decoder.*;
-import us.evelus.world.net.msg.codec.handler.BatchedMessageHandler;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public final class CodecRepository {
 
-    private Map<Class<? extends DatagramMessage>, DatagramMessageHandler> handlers = new HashMap<>();
-    private DatagramMessageDecoder<?>[] decoders = new  DatagramMessageDecoder[256];
+    private Map<Class<? extends GameMessage>, MessageHandler> handlers = new HashMap<>();
+    private MessageDecoder<?>[] decoders = new MessageDecoder[256];
 
     public CodecRepository() {
 
@@ -22,11 +21,6 @@ public final class CodecRepository {
         register(new TeleportMobMessageDecoder());
         register(new QueryObserverMessageDecoder());
         register(new TickMessageDecoder());
-
-        register(new BatchedMessageDecoder(this));
-
-        // Register all of the handlers
-        register(new BatchedMessageHandler(this));
     }
 
     private void checkId(int id) {
@@ -35,21 +29,21 @@ public final class CodecRepository {
         }
     }
 
-    public void register(DatagramMessageDecoder decoder) {
+    public void register(MessageDecoder decoder) {
         checkId(decoder.getId());
         decoders[decoder.getId()] = decoder;
     }
 
-    public DatagramMessageDecoder getDecoder(int id) {
+    public MessageDecoder getDecoder(int id) {
         checkId(id);
         return decoders[id];
     }
 
-    public void register(DatagramMessageHandler handler) {
+    public void register(MessageHandler handler) {
         handlers.put(handler.getMessageClass(), handler);
     }
 
-    public DatagramMessageHandler getHandler(DatagramMessage message) {
+    public MessageHandler getHandler(GameMessage message) {
         return handlers.get(message.getClass());
     }
 }

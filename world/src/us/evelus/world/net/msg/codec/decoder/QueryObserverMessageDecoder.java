@@ -1,13 +1,12 @@
 package us.evelus.world.net.msg.codec.decoder;
 
 import io.netty.buffer.ByteBuf;
-import us.evelus.world.net.msg.DatagramMessage;
 import us.evelus.world.net.msg.MessageConstants;
-import us.evelus.world.net.msg.codec.DatagramMessageDecoder;
+import us.evelus.world.net.msg.codec.MessageDecoder;
 import us.evelus.world.net.msg.codec.MalformedMessageException;
 import us.evelus.world.net.msg.impl.QueryObserverMessage;
 
-public final class QueryObserverMessageDecoder extends DatagramMessageDecoder<QueryObserverMessage> {
+public final class QueryObserverMessageDecoder extends MessageDecoder<QueryObserverMessage> {
 
     public QueryObserverMessageDecoder() {
         super(MessageConstants.QUERY_OBSERVER_MSG);

@@ -1,6 +1,6 @@
 package us.evelus.world.net.msg;
 
-public abstract class DatagramMessage {
+public abstract class GameMessage {
 
     private long uid = -1L;
 

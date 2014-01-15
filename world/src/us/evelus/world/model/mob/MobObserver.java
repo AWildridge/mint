@@ -10,5 +10,6 @@ public interface MobObserver {
     public void animated(Mob mob, Animation animation);
     public void teleported(Mob mob);
     public void modified(Mob mob);
+    public void active(Mob mob);
     public void inactive(Mob mob);
 }

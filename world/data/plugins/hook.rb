@@ -44,9 +44,13 @@ module Hook
                         @type    = type
                 end
 
-                def bind(context); context.bind(@handler) end
+                def bind(context)
+                        context.bind(@handler)
+                end
 
-                def unbind(context); context.unbind(@handler) end
+                def unbind(context)
+                        context.unbind(@handler)
+                end
         end
 
         # Define each of the hook types

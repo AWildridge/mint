@@ -3,11 +3,11 @@ package us.evelus.world.net.msg.codec.decoder;
 import io.netty.buffer.ByteBuf;
 import us.evelus.world.model.Position;
 import us.evelus.world.net.msg.MessageConstants;
-import us.evelus.world.net.msg.codec.DatagramMessageDecoder;
+import us.evelus.world.net.msg.codec.MessageDecoder;
 import us.evelus.world.net.msg.codec.MalformedMessageException;
 import us.evelus.world.net.msg.impl.SpawnPlayerMessage;
 
-public final class SpawnPlayerMessageDecoder extends DatagramMessageDecoder<SpawnPlayerMessage> {
+public final class SpawnPlayerMessageDecoder extends MessageDecoder<SpawnPlayerMessage> {
 
     public SpawnPlayerMessageDecoder() {
         super(MessageConstants.SPAWN_PLAYER_MSG);

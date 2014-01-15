@@ -37,7 +37,7 @@ public final class StateSymbol {
 
         try(Connection connection = DriverManager.getConnection("jdbc:sqlite:" + database)) {
             Statement statement = connection.createStatement();
-            ResultSet results = statement.executeQuery("SELECT * FROM STATE_SYMBOLS");
+            ResultSet results = statement.executeQuery("SELECT * FROM state_symbols");
             while(results.next()) {
                 StateSymbol symbol = new StateSymbol(results.getInt("STATE_ID"), results.getString("NAME"));
                 register(symbol);

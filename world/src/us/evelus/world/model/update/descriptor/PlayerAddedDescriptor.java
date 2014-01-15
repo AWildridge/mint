@@ -14,7 +14,7 @@ public final class PlayerAddedDescriptor extends SceneDescriptor {
     }
 
     @Override
-    public void serialize(ByteBuf buf) {
+    public void encode(ByteBuf buf) {
         buf.writeByte(DescriptorConstants.PLAYER_TYPE);
         buf.writeByte(0);
         buf.writeShort(player.getId());

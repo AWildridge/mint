@@ -22,5 +22,8 @@ public abstract class MobObserverAdapter implements MobObserver {
     public void modified(Mob mob) { }
 
     @Override
+    public void active(Mob mob) {}
+
+    @Override
     public void inactive(Mob mob) {}
 }

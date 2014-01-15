@@ -8,15 +8,15 @@ import us.evelus.world.model.Position;
 import us.evelus.world.model.World;
 import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.observer.SceneObserver;
-import us.evelus.world.net.DatagramMessageSender;
-import us.evelus.world.net.msg.codec.DatagramMessageHandler;
+import us.evelus.world.net.ChannelHelper;
+import us.evelus.world.net.msg.codec.MessageHandler;
 import us.evelus.world.net.msg.impl.SpawnObserverMessage;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class SpawnObserverMessageHandler extends DatagramMessageHandler<SpawnObserverMessage> {
+public final class SpawnObserverMessageHandler extends MessageHandler<SpawnObserverMessage> {
 
     private static final Logger logger = LoggerFactory.getLogger(SpawnObserverMessageHandler.class);
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -28,7 +28,7 @@ public final class SpawnObserverMessageHandler extends DatagramMessageHandler<Sp
     }
 
     @Override
-    public void handle(DatagramMessageSender sender, SpawnObserverMessage msg) {
+    public void handle(ChannelHelper sender, SpawnObserverMessage msg) {
         SceneObserver observer = new SceneObserver();
         switch(msg.getFlag()) {
 
@@ -43,7 +43,7 @@ public final class SpawnObserverMessageHandler extends DatagramMessageHandler<Sp
                 break;
         }
 
-        boolean successful = world.addObserver(observer);
+        boolean successful = world.addSceneObserver(observer);
 
         Map<String, Object> response = new HashMap<>();
         response.put("uid", msg.getUid());

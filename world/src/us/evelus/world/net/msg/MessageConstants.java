@@ -21,7 +21,5 @@ public class MessageConstants {
 
     public static final int COMMAND_MSG = 0xC8;
 
-    public static final int BATCH = 0xFF;
-
     private MessageConstants() {}
 }

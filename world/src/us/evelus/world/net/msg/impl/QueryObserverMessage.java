@@ -1,8 +1,8 @@
 package us.evelus.world.net.msg.impl;
 
-import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.GameMessage;
 
-public final class QueryObserverMessage extends DatagramMessage {
+public final class QueryObserverMessage extends GameMessage {
 
     private int id;
 

@@ -1,8 +1,8 @@
 package us.evelus.world.net.msg.impl;
 
-import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.GameMessage;
 
-public final class SpawnObserverMessage extends DatagramMessage {
+public final class SpawnObserverMessage extends GameMessage {
 
     public static final int EXACT_POS = 0x0;
     public static final int SYNC_MOB = 0x1;

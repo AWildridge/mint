@@ -56,6 +56,11 @@ public abstract class Mob extends Entity {
 
     public void tick() {
         //queuedUpdates.walkedDirection(Direction.NONE, Direction.NONE);
+
+        // Alert the observers that the mob is active
+        for(MobObserver observer : observers) {
+            observer.active(this);
+        }
     }
 
     public void synchronize() {

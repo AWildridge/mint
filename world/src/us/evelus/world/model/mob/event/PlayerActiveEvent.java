@@ -4,9 +4,9 @@ import us.evelus.world.model.EventVisitor;
 import us.evelus.world.model.Player;
 import us.evelus.world.model.mob.MobEvent;
 
-public final class PlayerBeaconEvent extends MobEvent<Player> {
+public final class PlayerActiveEvent extends MobEvent<Player> {
 
-    public PlayerBeaconEvent(Player plr) {
+    public PlayerActiveEvent(Player plr) {
         super(plr);
     }
 

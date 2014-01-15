@@ -1,13 +1,13 @@
 package us.evelus.world.net.msg.codec;
 
 import io.netty.buffer.ByteBuf;
-import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.GameMessage;
 
-public abstract class DatagramMessageDecoder<T extends DatagramMessage> {
+public abstract class MessageDecoder<T extends GameMessage> {
 
     private final int id;
 
-    public DatagramMessageDecoder(int id) {
+    public MessageDecoder(int id) {
         this.id = id;
     }
 

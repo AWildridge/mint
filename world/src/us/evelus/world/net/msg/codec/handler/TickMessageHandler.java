@@ -1,11 +1,11 @@
 package us.evelus.world.net.msg.codec.handler;
 
 import us.evelus.world.model.World;
-import us.evelus.world.net.DatagramMessageSender;
-import us.evelus.world.net.msg.codec.DatagramMessageHandler;
+import us.evelus.world.net.ChannelHelper;
+import us.evelus.world.net.msg.codec.MessageHandler;
 import us.evelus.world.net.msg.impl.TickMessage;
 
-public final class TickMessageHandler extends DatagramMessageHandler<TickMessage> {
+public final class TickMessageHandler extends MessageHandler<TickMessage> {
 
     private final World world;
 
@@ -15,7 +15,7 @@ public final class TickMessageHandler extends DatagramMessageHandler<TickMessage
     }
 
     @Override
-    public void handle(DatagramMessageSender sender, TickMessage msg) {
+    public void handle(ChannelHelper sender, TickMessage msg) {
         world.tick();
     }
 }

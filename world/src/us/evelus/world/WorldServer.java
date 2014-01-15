@@ -1,15 +1,15 @@
 package us.evelus.world;
 
-import io.netty.bootstrap.Bootstrap;
+import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.nio.NioDatagramChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.command.CommandDispatcher;
+import us.evelus.world.model.region.RegionLoader;
 import us.evelus.world.model.World;
-import us.evelus.world.model.mob.StateSymbol;
-import us.evelus.world.net.InboundDatagramMessageHandler;
+import us.evelus.world.net.GameChannelInitializer;
 import us.evelus.world.net.msg.codec.CodecRepository;
 import us.evelus.world.net.msg.codec.handler.*;
 import us.evelus.world.plugin.PluginContext;
@@ -25,7 +25,7 @@ public final class WorldServer {
     private final CodecRepository codecRepository = new CodecRepository();
     private final CommandDispatcher commandDispatcher = new CommandDispatcher();
     private final PluginLoader pluginLoader = new PluginLoader();
-    private final Bootstrap bootstrap = new Bootstrap();
+    private final ServerBootstrap bootstrap = new ServerBootstrap();
     private final World world = new World();
 
     public void init() {
@@ -45,6 +45,12 @@ public final class WorldServer {
         //    logger.error("Failed to load the SQLite driver", ex);
         //}
 
+        try {
+            RegionLoader.init("./data/config.db");
+        } catch(ClassNotFoundException ex) {
+            logger.error("Failed to load the SQLite driver");
+        }
+
         // Create and set the plugin context
         PluginContext context = new PluginContext(world);
         pluginLoader.setPluginContext(context);
@@ -59,7 +65,8 @@ public final class WorldServer {
 
     public void bind(int port) {
         try {
-            bootstrap.group(loopGroup).channel(NioDatagramChannel.class).handler(new InboundDatagramMessageHandler(codecRepository));
+            bootstrap.group(loopGroup).channel(NioServerSocketChannel.class)
+                    .childHandler(new GameChannelInitializer(codecRepository));
             bootstrap.bind(port).sync();
             logger.info("World server bound to port " + port);
         } catch(Exception ex) {

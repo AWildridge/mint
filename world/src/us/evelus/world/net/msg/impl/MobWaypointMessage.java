@@ -1,9 +1,9 @@
 package us.evelus.world.net.msg.impl;
 
 import us.evelus.world.model.Position;
-import us.evelus.world.net.msg.DatagramMessage;
+import us.evelus.world.net.msg.GameMessage;
 
-public final class MobWaypointMessage extends DatagramMessage {
+public final class MobWaypointMessage extends GameMessage {
 
     private Position[] points;
     private int characterId;

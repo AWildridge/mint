@@ -8,8 +8,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.model.World;
 import us.evelus.world.model.observer.SceneObserver;
-import us.evelus.world.net.DatagramMessageSender;
-import us.evelus.world.net.msg.codec.DatagramMessageHandler;
+import us.evelus.world.net.ChannelHelper;
+import us.evelus.world.net.msg.codec.MessageHandler;
 import us.evelus.world.net.msg.impl.QueryObserverMessage;
 
 import java.io.IOException;
@@ -17,7 +17,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 
-public final class QueryObserverMessageHandler extends DatagramMessageHandler<QueryObserverMessage> {
+public final class QueryObserverMessageHandler extends MessageHandler<QueryObserverMessage> {
 
     private static final Logger logger = LoggerFactory.getLogger(QueryObserverMessageHandler.class);
     private static final ObjectMapper mapper = new ObjectMapper();
@@ -29,11 +29,11 @@ public final class QueryObserverMessageHandler extends DatagramMessageHandler<Qu
     }
 
     @Override
-    public void handle(DatagramMessageSender sender, QueryObserverMessage msg) {
+    public void handle(ChannelHelper sender, QueryObserverMessage msg) {
         SceneObserver observer = world.getSceneObserver(msg.getId());
 
         ByteBuf buf = Unpooled.buffer();
-        observer.serializeDescriptors(buf);
+        observer.encodeDescriptors(buf);
 
         ByteBuf encoded = Base64.encode(buf);
 
