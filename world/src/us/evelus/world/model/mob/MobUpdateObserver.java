@@ -4,6 +4,7 @@ import us.evelus.world.model.Animation;
 import us.evelus.world.model.Graphic;
 import us.evelus.world.model.mob.event.AnimatedEvent;
 import us.evelus.world.model.mob.event.GraphicDisplayedEvent;
+import us.evelus.world.model.mob.event.MobActiveEvent;
 import us.evelus.world.model.mob.event.TeleportedEvent;
 import us.evelus.world.model.update.UpdateDispatcher;
 
@@ -28,5 +29,10 @@ public final class MobUpdateObserver extends MobObserverAdapter {
     @Override
     public void teleported(Mob mob) {
         dispatcher.queue(new TeleportedEvent(mob));
+    }
+
+    @Override
+    public void active(Mob mob) {
+        dispatcher.queue(new MobActiveEvent(mob));
     }
 }

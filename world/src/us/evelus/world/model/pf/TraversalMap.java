@@ -1,6 +1,6 @@
-package us.evelus.world.model;
+package us.evelus.world.model.pf;
 
-import static us.evelus.world.model.OrientationConstants.*;
+import static us.evelus.world.model.obj.OrientationConstants.*;
 
 public final class TraversalMap {
 

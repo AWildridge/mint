@@ -1,4 +1,6 @@
-package us.evelus.world.model;
+package us.evelus.world.model.obj;
+
+import us.evelus.world.model.Entity;
 
 public class SceneObject extends Entity {
 

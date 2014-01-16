@@ -2,8 +2,8 @@ package us.evelus.world.model.mob;
 
 import us.evelus.world.interact.InteractionHandler;
 import us.evelus.world.model.*;
+import us.evelus.world.model.obj.SceneObject;
 
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 

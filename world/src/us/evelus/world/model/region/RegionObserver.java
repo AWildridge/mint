@@ -1,7 +1,7 @@
 package us.evelus.world.model.region;
 
 import us.evelus.world.model.Position;
-import us.evelus.world.model.SceneObject;
+import us.evelus.world.model.obj.SceneObject;
 
 public abstract class RegionObserver {
     public abstract void sceneObjectAdded(Region region, Position position, SceneObject object);

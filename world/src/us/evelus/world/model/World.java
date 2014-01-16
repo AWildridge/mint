@@ -3,8 +3,9 @@ package us.evelus.world.model;
 import us.evelus.world.interact.InteractionHandler;
 import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.mob.MobUpdateObserver;
-import us.evelus.world.model.mob.event.PlayerActiveEvent;
 import us.evelus.world.model.observer.SceneObserver;
+import us.evelus.world.model.region.RegionRepository;
+import us.evelus.world.model.region.RegionUpdateObserver;
 import us.evelus.world.model.update.UpdateDispatcher;
 import us.evelus.world.task.TaskScheduler;
 
@@ -17,7 +18,7 @@ public final class World {
     private EntityList<NPC> npcs = new EntityList<>(NPC_CAPACITY);
     private UpdateDispatcher updateDispatcher = new UpdateDispatcher();
     private InteractionHandler interactionHandler = new InteractionHandler(this);
-    private RegionRepository regions = new RegionRepository();
+    private RegionRepository regionRepository = new RegionRepository();
     private TaskScheduler scheduler = new TaskScheduler();
 
     public void tick() {
@@ -28,9 +29,6 @@ public final class World {
         // Pre-process all of the players
         for(Player player : players) {
 
-            // Alert the observers that the player exists
-            updateDispatcher.queue(new PlayerActiveEvent(player));
-
             // Update the player
             player.tick();
 
@@ -38,11 +36,11 @@ public final class World {
             player.synchronize();
         }
 
-        // Update the region repository
-        regions.tick();
-
         // Dispatch all the events to the observers registered to the world
         updateDispatcher.tick();
+
+        // Update the region repository
+        regionRepository.purge();
     }
 
     public boolean addSceneObserver(SceneObserver observer) {
@@ -61,7 +59,7 @@ public final class World {
 
         // Initialize the player object
         player.attach(new MobUpdateObserver(updateDispatcher));
-        player.attach(new MobActiveObserver(regions));
+        player.attach(new RegionUpdateObserver(regionRepository));
         player.setInteractionHandler(interactionHandler);
 
         return true;

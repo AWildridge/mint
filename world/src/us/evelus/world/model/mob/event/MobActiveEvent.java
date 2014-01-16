@@ -2,12 +2,13 @@ package us.evelus.world.model.mob.event;
 
 import us.evelus.world.model.EventVisitor;
 import us.evelus.world.model.Player;
+import us.evelus.world.model.mob.Mob;
 import us.evelus.world.model.mob.MobEvent;
 
-public final class PlayerActiveEvent extends MobEvent<Player> {
+public final class MobActiveEvent extends MobEvent {
 
-    public PlayerActiveEvent(Player plr) {
-        super(plr);
+    public MobActiveEvent(Mob mob) {
+        super(mob);
     }
 
     @Override

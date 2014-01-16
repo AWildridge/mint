@@ -1,6 +1,6 @@
 package us.evelus.world.interact;
 
-import us.evelus.world.model.SceneObject;
+import us.evelus.world.model.obj.SceneObject;
 import us.evelus.world.model.mob.Mob;
 
 import java.util.HashMap;

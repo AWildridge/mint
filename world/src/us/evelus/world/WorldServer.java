@@ -7,6 +7,8 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import us.evelus.world.command.CommandDispatcher;
+import us.evelus.world.model.Player;
+import us.evelus.world.model.Position;
 import us.evelus.world.model.region.RegionLoader;
 import us.evelus.world.model.World;
 import us.evelus.world.net.GameChannelInitializer;

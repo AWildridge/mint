@@ -2,8 +2,8 @@ package us.evelus.world.model.region;
 
 import io.netty.buffer.ByteBuf;
 import us.evelus.world.model.Position;
-import us.evelus.world.model.SceneObject;
-import us.evelus.world.model.TraversalMap;
+import us.evelus.world.model.obj.SceneObject;
+import us.evelus.world.model.pf.TraversalMap;
 
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 public final class Region implements Comparable<Region> {
 
-    public static final int DISPOSE_TICKS = 50;
+    public static final long DISPOSE_TIME = 50000L;
     public static final int BLOCKED_FLAG = 0x0;
 
     private Map<Position, SceneObject> objects = new LinkedHashMap<>();
@@ -31,7 +31,7 @@ public final class Region implements Comparable<Region> {
     private long lastUpdatedTime;
 
     public Region(Position pos) {
-        attach(new ClipObserver(traversalMap));
+        attach(new RegionClipObserver(traversalMap));
         lastUpdatedTime = System.currentTimeMillis();
         position = pos;
     }
@@ -45,7 +45,7 @@ public final class Region implements Comparable<Region> {
     }
 
     public void decodeObjectData(ByteBuf buf) {
-        while(true) {
+        while(buf.isReadable()) {
             Position position = Position.fromHash14(buf.readShort());
             int type = buf.readShort();
 
@@ -78,7 +78,7 @@ public final class Region implements Comparable<Region> {
     }
 
     public void decodeAreaData(ByteBuf buf) {
-        while(true) {
+        while(buf.isReadable()) {
 
             // Read the opcode from the buffer
             int opcode = buf.readByte();
@@ -99,7 +99,7 @@ public final class Region implements Comparable<Region> {
     }
 
     public void decodeTriggerData(ByteBuf buf) {
-        while(true) {
+        while(buf.isReadable()) {
 
             // Read the opcode from the buffer
             int opcode = buf.readByte();
@@ -119,12 +119,18 @@ public final class Region implements Comparable<Region> {
         }
     }
 
+    /**
+     * Gets if the region should be disposed.
+     *
+     * @return
+     *          If the region should be disposed of.
+     */
     public boolean dispose() {
         long diff = System.currentTimeMillis() - lastUpdatedTime;
-        return diff > DISPOSE_TICKS * 600L;
+        return diff >= DISPOSE_TIME;
     }
 
-    public void markTime() {
+    public void updated() {
         lastUpdatedTime = System.currentTimeMillis();
     }
 

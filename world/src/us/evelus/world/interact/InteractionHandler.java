@@ -2,6 +2,7 @@ package us.evelus.world.interact;
 
 import us.evelus.world.model.*;
 import us.evelus.world.model.mob.Mob;
+import us.evelus.world.model.obj.SceneObject;
 
 public final class InteractionHandler {
 

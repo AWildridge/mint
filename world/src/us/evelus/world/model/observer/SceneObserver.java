@@ -18,7 +18,7 @@ public final class SceneObserver extends Entity implements EventVisitor {
 
     private List<SceneDescriptor> descriptors = new LinkedList<>();
     private Set<Player> players = new HashSet<>();
-    private Set<Player> plrDelete = new HashSet<>();
+    private Set<Player> pDelete = new HashSet<>();
     private boolean boundsUpdated;
     private Rectangle bounds;
     private int size;
@@ -67,25 +67,33 @@ public final class SceneObserver extends Entity implements EventVisitor {
     }
 
     @Override
-    public void visit(PlayerActiveEvent event) {
+    public void visit(MobActiveEvent event) {
 
         if(!isValid(event)) {
             return;
         }
 
-        // Limit the amount of players that can be appended to the list
-        if(players.size() >= 256) {
-            return;
-        }
+        Mob mob = event.getMob();
 
-        // Add the player to the players list
-        if(!players.contains(event.getMob())) {
-            descriptors.add(new PlayerAddedDescriptor(event.getMob()));
-            return;
-        }
+        // I hate this but its the easiest way to do this
+        if(mob instanceof Player) {
 
-        // Remove the player from the players to delete
-        plrDelete.remove(event.getMob());
+            Player player = (Player) mob;
+
+            // Limit the amount of players that can be appended to the list
+            if(players.size() >= 256) {
+                return;
+            }
+
+            // Add the player to the players list
+            if(!players.contains(player)) {
+                descriptors.add(new PlayerAddedDescriptor(player));
+                return;
+            }
+
+            // Remove the player from the players to delete
+            pDelete.remove(player);
+        }
     }
 
     @Override
@@ -114,10 +122,10 @@ public final class SceneObserver extends Entity implements EventVisitor {
     public void tick() {
 
         // Remove all of the players that are scheduled to be deleted
-        players.removeAll(plrDelete);
+        players.removeAll(pDelete);
 
         // Add a description for each player that needs to be deleted
-        for(Player player : plrDelete) {
+        for(Player player : pDelete) {
             descriptors.add(new PlayerDeletedDescriptor(player));
         }
 
@@ -127,10 +135,10 @@ public final class SceneObserver extends Entity implements EventVisitor {
         }
 
         // Clear the deleted set of players
-        plrDelete.clear();
+        pDelete.clear();
 
         // Append all of the players to the list
-        plrDelete.addAll(players);
+        pDelete.addAll(players);
     }
 
     /**

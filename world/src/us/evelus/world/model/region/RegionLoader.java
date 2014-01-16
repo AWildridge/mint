@@ -48,7 +48,7 @@ public final class RegionLoader {
             }
 
             // Create and decode the data for the specified region
-            Region region = new Region(position);
+            Region region = new Region(position.getRegionBase());
 
             // Read the tile data first so that the clipping map is properly set
             region.decodeTileData(unpackData(results.getBytes("tile_data")));
@@ -62,14 +62,6 @@ public final class RegionLoader {
             logger.error("Failed to load region " + position.hash18(), ex);
             return null;
         }
-    }
-
-    public boolean save(Region region) {
-        return false;
-    }
-
-    private static ByteBuf packData(ByteBuf buf) {
-        return null;
     }
 
     private static ByteBuf unpackData(byte[] bytes) {

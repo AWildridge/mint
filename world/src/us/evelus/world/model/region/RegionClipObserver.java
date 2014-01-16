@@ -1,14 +1,14 @@
 package us.evelus.world.model.region;
 
 import us.evelus.world.model.Position;
-import us.evelus.world.model.SceneObject;
-import us.evelus.world.model.TraversalMap;
+import us.evelus.world.model.obj.SceneObject;
+import us.evelus.world.model.pf.TraversalMap;
 
-public final class ClipObserver extends RegionObserver {
+public final class RegionClipObserver extends RegionObserver {
 
     private final TraversalMap traversalMap;
 
-    public ClipObserver(TraversalMap traversalMap) {
+    public RegionClipObserver(TraversalMap traversalMap) {
         this.traversalMap = traversalMap;
     }
 

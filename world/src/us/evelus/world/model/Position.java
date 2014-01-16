@@ -46,6 +46,14 @@ public final class Position {
         return y >> 6;
     }
 
+    public int baseRegionX() {
+        return regionX() << 6;
+    }
+
+    public int baseRegionY() {
+        return regionY() << 6;
+    }
+
     public int localRegionX() {
         return x - regionX() << 6;
     }
@@ -71,11 +79,15 @@ public final class Position {
     }
 
     public int hash18() {
-        return plane() << 16 | regionX() << 8 | regionX();
+        return plane() << 16 | regionY() << 8 | regionX();
+    }
+
+    public int hash30() {
+        return plane() << 28 | y() << 14 | x();
     }
 
     public Position getRegionBase() {
-        return new Position(regionX(), regionY(), plane);
+        return new Position(baseRegionX(), baseRegionY(), plane);
     }
 
     public boolean within(Rectangle rectangle) {
@@ -88,6 +100,10 @@ public final class Position {
 
     public Rectangle getSceneBounds(int size) {
         return new Rectangle(sceneX(size >> 4), sceneY(size >> 4) - size, size, size);
+    }
+
+    public String toString() {
+        return "x: " + x + ", y: " + y + ", plane: " + plane;
     }
 
     public static Position fromHash14(int hash) {
